@@ -1,5 +1,5 @@
 <template>
-  <div class="base">
+  <MainLayout>
     <nav class="top-infos">
       <div class="container">
         <div class="row">
@@ -182,14 +182,10 @@
         </div>
       </div>
     </section>
-  </div>
+  </MainLayout>
 </template>
 
 <style scoped>
-.base {
-  padding: 20px;
-}
-
 .top-infos .area-infos {
   display: flex;
   justify-content: space-between;
@@ -434,6 +430,8 @@
 </style>
 
 <script setup>
+import MainLayout from './layouts/MainLayout.vue';
+
 import { ref } from "vue";
 
 const showBalance = ref(true);
