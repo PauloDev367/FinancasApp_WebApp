@@ -12,8 +12,14 @@
 }
 
 html,
-body {
+body,
+.base {
   scroll-behavior: smooth;
   background-color: var(--bg-blue);
   font-family: "Inter", sans-serif;
+}
+
+a,
+a:hover {
+  text-decoration: none !important;
 }
