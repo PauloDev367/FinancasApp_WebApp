@@ -5,12 +5,12 @@
   <footer>
     <ul>
       <li>
-        <a href="#" class="active">
+        <a href="/home" class="active">
           <i class="fa-solid fa-person-shelter"></i>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/cash-flow-page">
           <i class="fa-solid fa-list-check"></i>
         </a>
       </li>

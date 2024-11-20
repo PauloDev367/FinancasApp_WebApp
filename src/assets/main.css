@@ -1,3 +1,53 @@
 @import './base.css';
 
+#nav-carousel-months {
+    position: relative;
+    background-color: var(--bg-blue);
+    margin-bottom: 40px;
+}
 
+#nav-carousel-months .owl-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    padding: 0 20px;
+    width: 100%;
+}
+
+#nav-carousel-months .owl-dots {
+    display: none !important;
+}
+
+
+#nav-carousel-months .owl-nav button,
+#nav-carousel-months .owl-nav button span {
+    font-size: 3rem;
+    height: 30px;
+    display: inline-block;
+}
+
+#nav-carousel-months .item {
+    font-weight: bold;
+    border: 3px solid #fff;
+    background-color: #fff;
+    color: var(--bg-blue);
+    width: 200px;
+    font-size: 1.3rem;
+    margin: 0 auto;
+    border-radius: 50px;
+    margin-top: 20px;
+}
+
+#nav-carousel-months .main-month {
+    font-weight: bold;
+    border: 3px solid #fff;
+    background-color: #fff;
+    color: var(--bg-blue);
+    width: 200px;
+    font-size: 1.3rem;
+    margin: 0 auto;
+    border-radius: 50px;
+    margin-top: 20px;
+}
