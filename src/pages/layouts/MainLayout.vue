@@ -37,6 +37,7 @@
 .info {
   padding: 20px;
   background-color: var(--bg-blue);
+  margin-bottom: 100px;
 }
 footer {
   background-color: var(--black);
@@ -74,7 +75,7 @@ footer ul li a.plus-icon i {
   transition: all 0.3s;
   border-radius: 5px;
 }
-footer ul li a.plus-icon:hover > i{
+footer ul li a.plus-icon:hover > i {
   border-radius: 50%;
   background-color: var(--dark-green);
 }
