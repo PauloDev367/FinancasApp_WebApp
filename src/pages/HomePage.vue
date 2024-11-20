@@ -85,7 +85,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    Últimos 5 
+                    Últimos 5
                   </button>
                   <div
                     class="dropdown-menu"
@@ -245,7 +245,7 @@
 }
 .acount-balances .container {
   color: #fff;
-  background-color: var(--bg-light-blue);
+  background-color: var(--bg-rgba-blue);
   padding: 30px;
   border-radius: 5px;
 }
@@ -327,7 +327,7 @@
 }
 .last-releases .container {
   color: #fff;
-  background-color: var(--bg-light-blue);
+  background-color: var(--bg-rgba-blue);
   padding: 30px;
   border-radius: 5px;
 }
@@ -430,7 +430,7 @@
 </style>
 
 <script setup>
-import MainLayout from './layouts/MainLayout.vue';
+import MainLayout from "./layouts/MainLayout.vue";
 
 import { ref } from "vue";
 

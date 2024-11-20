@@ -3,7 +3,6 @@
 #nav-carousel-months {
     position: relative;
     background-color: var(--bg-blue);
-    margin-bottom: 40px;
 }
 
 #nav-carousel-months .owl-nav {
@@ -12,7 +11,6 @@
     align-items: center;
     position: absolute;
     top: 0;
-    padding: 0 20px;
     width: 100%;
 }
 

@@ -3,8 +3,10 @@
 :root {
   --bg-blue: #17153B;
   --bg-light-blue: #433D8B;
+  --bg-rgba-blue: rgba(203, 172, 214, 0.3);
   --black: #000;
   --lightness: #CBACD6;
+  --resume: #2E236C;
   --dark-green: #417B5A;
   --lightness-green: #43FF00;
   --dark-red: #DB5461;
