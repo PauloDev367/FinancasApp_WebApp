@@ -238,14 +238,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-nav {
-  color: #fff;
-  background-color: var(--bg-blue);
-}
-nav .item {
-  text-align: center;
-}
-
 #chashflow {
   background-color: var(--bg-blue);
   padding-top: 40px;

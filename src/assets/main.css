@@ -49,3 +49,12 @@
     border-radius: 50px;
     margin-top: 20px;
 }
+
+nav {
+    color: #fff;
+    background-color: var(--bg-blue);
+}
+
+nav .item {
+    text-align: center;
+}
