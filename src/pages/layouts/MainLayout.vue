@@ -5,33 +5,51 @@
   <footer>
     <ul>
       <li>
-        <a href="/home" class="active">
+        <a href="/home" :class="{ active: isActive('/home') }">
           <i class="fa-solid fa-person-shelter"></i>
         </a>
       </li>
       <li>
-        <a href="/cash-flow-page">
+        <a
+          href="/cash-flow-page"
+          :class="{ active: isActive('/cash-flow-page') }"
+        >
           <i class="fa-solid fa-list-check"></i>
         </a>
       </li>
       <li>
-        <a href="#" class="plus-icon">
+        <a
+          href="/add-entry"
+          class="plus-icon"
+          :class="{ active: isActive('/add-entry') }"
+        >
           <i class="fa-solid fa-plus"></i>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/reports" :class="{ active: isActive('/reports') }">
           <i class="fa-solid fa-chart-simple"></i>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/goals" :class="{ active: isActive('/goals') }">
           <i class="fa-solid fa-bullseye"></i>
         </a>
       </li>
     </ul>
   </footer>
 </template>
+
+
+<script setup>
+import { useRoute } from "vue-router";
+import { ref } from "vue";
+
+const isActive = (path) => {
+  const route = useRoute();
+  return route.path === path;
+};
+</script>
 
 <style scoped>
 .info {
