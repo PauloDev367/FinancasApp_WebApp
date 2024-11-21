@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-12">
             <div class="area-infos">
-              <a href="#" class="account">
+              <a href="/configuration" class="account">
                 <i class="fa-solid fa-user"></i>
                 <div class="content">
                   <h3>{{ helloMessage() }}</h3>

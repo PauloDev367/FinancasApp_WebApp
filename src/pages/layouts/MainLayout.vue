@@ -32,8 +32,8 @@
         </a>
       </li>
       <li>
-        <a href="/goals" :class="{ active: isActive('/goals') }">
-          <i class="fa-solid fa-bullseye"></i>
+        <a href="/configuration" :class="{ active: isActive('/configuration') }">
+          <i class="fa-solid fa-gear"></i>
         </a>
       </li>
     </ul>
