@@ -95,6 +95,10 @@ footer ul li a.plus-icon i {
 }
 footer ul li a.plus-icon:hover > i {
   border-radius: 50%;
-  background-color: var(--dark-green);
+  background-color: var(--lightness);
+}
+footer ul li a.plus-icon.active i {
+  border-radius: 50%;
+  background-color: var(--lightness);
 }
 </style>

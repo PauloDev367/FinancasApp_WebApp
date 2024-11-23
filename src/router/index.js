@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage.vue';
 import CashFlowPage from '../pages/CashFlowPage.vue';
 import ReportsPage from '../pages/ReportsPage.vue';
 import ConfigurationPage from '../pages/ConfigurationPage.vue';
+import AddEntryPage from '../pages/AddEntryPage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/configuration',
       name: 'ConfigurationPage',
       component: ConfigurationPage,
+    },
+    {
+      path: '/add-entry',
+      name: 'AddEntryPage',
+      component: AddEntryPage,
     },
   ],
 })

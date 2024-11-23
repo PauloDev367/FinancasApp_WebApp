@@ -58,3 +58,36 @@ nav {
 nav .item {
     text-align: center;
 }
+
+
+.btn-cancel {
+    background-color: var(--dark-red) !important;
+    color: #fff !important;
+}
+
+.btn-select {
+    background-color: var(--bg-light-blue) !important;
+    color: #fff !important;
+}
+
+.btn-select-opt {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+}
+
+.btn-outline-submit {
+    background-color: transparent;
+    border: 2px solid var(--lightness);
+    color: var(--lightness);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: all .3s;
+}
+
+.btn-outline-submit:hover {
+    background-color: var(--lightness);
+    color: #fff;
+}
