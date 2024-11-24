@@ -83,19 +83,40 @@
           </button>
         </div>
         <div class="modal-body">
-          <ul>
-            <li v-for="account in bankAccounts" :key="account.id">
-              {{ account.name }}
+          <ul class="p-0 list-unstyled m-0">
+            <li
+              v-for="account in bankAccounts"
+              :key="account.id"
+              class="list-account"
+            >
+              <div>
+                <input
+                  type="radio"
+                  name="bankAccount"
+                  :id="`${bankAccount}${account.id}`"
+                  :value="account.id"
+                  v-model="selectedBankAccount"
+                />
+                <label :for="`${bankAccount}${account.id}`">
+                  <i class="fa-solid fa-wallet"></i>
+                  {{ account.name }}
+                </label>
+              </div>
             </li>
           </ul>
         </div>
-        <div class="modal-footer"></div>
+        <div class="modal-footer">
+          <button @click="changeBankAccount" class="btn btn-select w-100">
+            <strong>ATUALIZAR</strong>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import toastr from "toastr";
 import { onMounted, ref, toRaw, watch } from "vue";
 
 const { bankAccounts } = defineProps({
@@ -104,6 +125,7 @@ const { bankAccounts } = defineProps({
 const showBalance = ref(true);
 const mainAccount = ref({});
 const allBankAccounts = ref({});
+const selectedBankAccount = ref({});
 
 onMounted(() => {
   const actualShowBalance = window.localStorage.getItem(
@@ -152,6 +174,12 @@ const formatBalance = (balance) => {
   });
 
   return formatoBRL.format(balance);
+};
+
+const changeBankAccount = () => {
+  window.localStorage.setItem("main-account-id", selectedBankAccount.value);
+  getMainAccountData();
+  toastr.success("Conta bancária atualizada");
 };
 </script>
 
@@ -274,5 +302,20 @@ const formatBalance = (balance) => {
 .my-accounts button:hover {
   background-color: #fff;
   color: var(--bg-light-blue);
+}
+.list-account label {
+  padding: 10px;
+  border: 2px solid var(--bg-blue);
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  display: inline-block;
+}
+.list-account input {
+  display: none;
+}
+.list-account input:checked + label {
+  background-color: var(--lightness);
 }
 </style>
