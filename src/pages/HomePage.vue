@@ -28,6 +28,7 @@
       :showBalance="showBalance"
     />
 
+    
     <LastEntriesComponent />
   </MainLayout>
 </template>

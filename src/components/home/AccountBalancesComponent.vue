@@ -179,7 +179,7 @@ const formatBalance = (balance) => {
 const changeBankAccount = () => {
   window.localStorage.setItem("main-account-id", selectedBankAccount.value);
   getMainAccountData();
-  toastr.success("Conta bancária atualizada");
+  window.location.reload();
 };
 </script>
 
