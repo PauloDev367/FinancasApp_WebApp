@@ -28,147 +28,7 @@
       </nav>
     </div>
 
-    <main id="chashflow">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="date">1 de outubro</h2>
-
-            <div class="mt-3">
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="expense">- R$ 19,00</h5>
-                  <h6>pago</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <h2 class="date">3 de outubro</h2>
-
-            <div class="mt-3">
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="expense">- R$ 19,00</h5>
-                  <h6>pago</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <h2 class="date">10 de dezembro</h2>
-
-            <div class="mt-3">
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="expense">- R$ 19,00</h5>
-                  <h6>pago</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-              <div class="card-cashflow">
-                <div class="head">
-                  <i class="fa-solid fa-utensils"></i>
-                  <div class="content">
-                    <h3>Cachorro quente</h3>
-                    <h4>Conto inicial - 01/01/2024</h4>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5 class="income">+ R$ 19,00</h5>
-                  <h6>recebido</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    <CashFlowComponent :clientEntries="clientEntries" />
 
     <section id="resume">
       <ul>
@@ -196,22 +56,26 @@
 </template>
 
 <script setup>
+import { getAllEntries } from "@/services/entries";
 import searchdate from "@/stores/searchdate";
 import $ from "jquery";
 window.$ = window.jQuery = $;
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import toastr from "toastr";
 import { onMounted, ref } from "vue";
 import MainLayout from "./layouts/MainLayout.vue";
+import CashFlowComponent from "./../components/chashflow/CashFlowComponent.vue";
 
 const yearToSearch = ref(searchdate.yearToSearch);
 const monthToSearch = ref(searchdate.monthToSearch);
 
 const nextTenYear = ref(searchdate.getNextTenYears());
 const carousel = ref(null);
+const page = ref(1);
 
 const currentMonthIndex = ref(new Date().getMonth());
-
+const clientEntries = ref([]);
 const months = ref([
   "Janeiro",
   "Fevereiro",
@@ -243,7 +107,7 @@ onMounted(async () => {
     const monthUpdate = event.item.index + 1;
     searchdate.setMonthToSearch(monthUpdate);
     monthToSearch.value = searchdate.monthToSearch;
-
+    getEntries();
     const centralIndex = event.item.index;
     currentMonthIndex.value = centralIndex;
     $(carousel.value)
@@ -252,83 +116,31 @@ onMounted(async () => {
       .eq(centralIndex)
       .addClass("main-month");
   });
+
+  getEntries();
 });
+
+const getEntries = () => {
+  const perPage = 20;
+  getAllEntries(page.value, perPage, yearToSearch.value, monthToSearch.value)
+    .then((result) => {
+      clientEntries.value = result.data.items;
+    })
+    .catch((err) => {
+      toastr.error("Erro ao tentar buscar lançamentos");
+    });
+};
 
 const changeSelectedYear = (event) => {
   const newYear = event.target.value;
   yearToSearch.value = newYear;
   searchdate.setYearToSearch(newYear);
+  getEntries();
 };
 </script>
 
 <style scoped>
-#chashflow {
-  background-color: var(--bg-blue);
-  padding-top: 40px;
-  margin-bottom: 40px;
-}
 
-#chashflow h2 {
-  color: #fff;
-  font-size: 1rem;
-}
-#chashflow .card-cashflow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  background-color: var(--bg-rgba-blue);
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-#chashflow .card-cashflow .head {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-#chashflow .card-cashflow .head i {
-  font-size: 1.3rem;
-  background-color: #fff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#chashflow .card-cashflow .head .content {
-  color: #fff;
-  margin-left: 10px;
-}
-#chashflow .card-cashflow .head .content h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0;
-}
-#chashflow .card-cashflow .head .content h4 {
-  font-size: 0.9rem;
-  margin-bottom: 0;
-  font-weight: 400;
-}
-#chashflow .card-cashflow .price {
-  text-align: right;
-  font-weight: 400;
-}
-#chashflow .card-cashflow h5 {
-  color: #fff;
-  font-weight: bold;
-  font-size: 1rem;
-}
-#chashflow .card-cashflow h5.expense {
-  color: var(--lightness-red);
-}
-#chashflow .card-cashflow h5.income {
-  color: var(--lightness-green);
-}
-#chashflow .card-cashflow h6 {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #fff;
-}
 #resume {
   position: fixed;
   width: 100%;
