@@ -93,11 +93,11 @@
                 <input
                   type="radio"
                   name="bankAccount"
-                  :id="`${bankAccount}${account.id}`"
+                  :id="`bankAccount${account.id}`"
                   :value="account.id"
                   v-model="selectedBankAccount"
                 />
-                <label :for="`${bankAccount}${account.id}`">
+                <label :for="`bankAccount${account.id}`">
                   <i class="fa-solid fa-wallet"></i>
                   {{ account.name }}
                 </label>
@@ -182,8 +182,6 @@ const changeBankAccount = () => {
   toastr.success("Conta bancária atualizada");
 };
 </script>
-
-
 
 <style scoped>
 .show-balance {
