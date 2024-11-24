@@ -22,52 +22,11 @@
       </div>
     </nav>
 
-    <main class="acount-balances">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="area-general-infos">
-              <div>
-                <h3>Saldo geral</h3>
-                <h2>R$ 3.000,00</h2>
-              </div>
-              <i
-                @click="changeShowBalanceStatus"
-                class="show-balance fa-solid fa-eye-slash"
-                v-if="showBalance"
-              ></i>
-              <i
-                @click="changeShowBalanceStatus"
-                class="show-balance fa-solid fa-eye"
-                v-else
-              ></i>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="my-accounts">
-              <h3>Minhas contas</h3>
-              <div>
-                <div class="account">
-                  <div class="head">
-                    <i class="fa-solid fa-wallet"></i>
-                    <div class="content">
-                      <h4>Conta inicial</h4>
-                      <h5>Nome conta</h5>
-                    </div>
-                  </div>
-                  <div class="body">
-                    <h6>R$ 3.000,00</h6>
-                  </div>
-                </div>
-                <button>Mudar de conta</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
+    <AccountBalancesComponent
+      v-if="bankAccounts != null"
+      :bankAccounts="bankAccounts"
+      :showBalance="showBalance"
+    />
     <section class="last-releases">
       <div class="container">
         <div class="row">
@@ -185,6 +144,34 @@
   </MainLayout>
 </template>
 
+
+<script setup>
+import MainLayout from "./layouts/MainLayout.vue";
+import AccountBalancesComponent from "./../components/home/AccountBalancesComponent.vue";
+import { getCurrentInstance, onMounted, ref } from "vue";
+import { getBankAccounts } from "./../services/bankaccount.js";
+
+const toastr = getCurrentInstance().appContext.config.globalProperties.$toastr;
+const bankAccounts = ref(null);
+
+onMounted(async () => {
+  const { data } = await getBankAccounts(0);
+  bankAccounts.value = data.items;
+});
+
+const helloMessage = () => {
+  const horaAtual = new Date().getHours();
+
+  if (horaAtual < 12) {
+    return "Bom dia";
+  } else if (horaAtual < 18) {
+    return "Boa tarde";
+  } else {
+    return "Boa noite";
+  }
+};
+</script>
+
 <style scoped>
 .top-infos .area-infos {
   display: flex;
@@ -240,88 +227,7 @@
   margin-bottom: 0;
   padding: 0;
 }
-.acount-balances {
-  margin-top: 20px;
-}
-.acount-balances .container {
-  color: #fff;
-  background-color: var(--bg-rgba-blue);
-  padding: 30px;
-  border-radius: 5px;
-}
-.acount-balances .container .area-general-infos {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 10px;
-}
-.acount-balances h3 {
-  font-weight: 300;
-  font-size: 1.3rem;
-}
-.acount-balances .container .area-general-infos h2 {
-  font-size: 1.5rem;
-}
 
-.show-balance {
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.my-accounts {
-  padding-top: 20px;
-}
-.my-accounts .account {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.my-accounts .account .head {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-.my-accounts .account .head i {
-  border: none;
-}
-.my-accounts .account .head h4 {
-  font-weight: 300;
-  margin-bottom: 0;
-  font-size: 1.2rem;
-}
-.my-accounts .account .head h5 {
-  font-weight: 300;
-  font-size: 1rem;
-  margin-bottom: 0;
-}
-.my-accounts .account .body h6 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  margin-bottom: 0;
-}
-.my-accounts button {
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  display: inline-block;
-  width: 100%;
-  padding: 10px 15px;
-  text-transform: uppercase;
-  margin-top: 20px;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-.my-accounts button:hover {
-  background-color: #fff;
-  color: var(--bg-light-blue);
-}
 .last-releases {
   margin-top: 20px;
 }
@@ -428,26 +334,3 @@
   font-weight: 300;
 }
 </style>
-
-<script setup>
-import MainLayout from "./layouts/MainLayout.vue";
-
-import { ref } from "vue";
-
-const showBalance = ref(true);
-
-const changeShowBalanceStatus = () => {
-  showBalance.value = !showBalance.value;
-};
-const helloMessage = () => {
-  const horaAtual = new Date().getHours();
-
-  if (horaAtual < 12) {
-    return "Bom dia";
-  } else if (horaAtual < 18) {
-    return "Boa tarde";
-  } else {
-    return "Boa noite";
-  }
-};
-</script>
