@@ -2,15 +2,24 @@
   <MainLayout>
     <div id="nav-carousel-months">
       <nav>
+        <div class="text-center">
+          <select name="year" class="select-year" @change="changeSelectedYear">
+            <option
+              v-for="(year, index) in nextTenYear"
+              :key="index"
+              :selected="yearToSearch == year"
+              :value="year"
+            >
+              {{ year }}
+            </option>
+          </select>
+        </div>
         <div>
           <div ref="carousel" class="owl-carousel">
             <div
               v-for="(month, index) in months"
               :key="index"
-              :class="[
-                'item',
-                { 'main-month': index === currentMonthIndex.value },
-              ]"
+              :class="['item', { 'main-month': index === month }]"
             >
               {{ month }}
             </div>
@@ -187,6 +196,7 @@
 </template>
 
 <script setup>
+import searchdate from "@/stores/searchdate";
 import $ from "jquery";
 window.$ = window.jQuery = $;
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -194,6 +204,10 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import { onMounted, ref } from "vue";
 import MainLayout from "./layouts/MainLayout.vue";
 
+const yearToSearch = ref(searchdate.yearToSearch);
+const monthToSearch = ref(searchdate.monthToSearch);
+
+const nextTenYear = ref(searchdate.getNextTenYears());
 const carousel = ref(null);
 
 const currentMonthIndex = ref(new Date().getMonth());
@@ -222,10 +236,14 @@ onMounted(async () => {
     nav: true,
     autoplay: false,
     items: 1,
-    startPosition: currentMonthIndex.value,
+    startPosition: monthToSearch.value - 1,
   });
 
   $(carousel.value).on("changed.owl.carousel", (event) => {
+    const monthUpdate = event.item.index + 1;
+    searchdate.setMonthToSearch(monthUpdate);
+    monthToSearch.value = searchdate.monthToSearch;
+
     const centralIndex = event.item.index;
     currentMonthIndex.value = centralIndex;
     $(carousel.value)
@@ -235,6 +253,12 @@ onMounted(async () => {
       .addClass("main-month");
   });
 });
+
+const changeSelectedYear = (event) => {
+  const newYear = event.target.value;
+  yearToSearch.value = newYear;
+  searchdate.setYearToSearch(newYear);
+};
 </script>
 
 <style scoped>

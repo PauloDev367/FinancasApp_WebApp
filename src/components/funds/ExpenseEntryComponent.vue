@@ -198,7 +198,6 @@ onMounted(() => {
 }
 .card-entry input[type="number"]::-webkit-inner-spin-button,
 .card-entry input[type="number"]::-webkit-outer-spin-button {
-  /* margin-left: 20px; */
   -webkit-appearance: none;
   margin: 0;
 }
