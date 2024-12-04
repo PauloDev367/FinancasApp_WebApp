@@ -32,7 +32,7 @@
                 type="number"
                 id="value-float"
                 step="0.01"
-                value="0.00"
+                v-model="value"
                 min="0.00"
               />
             </div>
@@ -47,7 +47,7 @@
   </header>
   <MainLayout>
     <template v-if="isAnIncome == true">
-      <IncomeEntryComponent />
+      <IncomeEntryComponent :value="value" @incomeCreated="incomeCreated" />
     </template>
     <template v-else>
       <ExpenseEntryComponent />
@@ -60,9 +60,14 @@
 import { ref } from "vue";
 import MainLayout from "./layouts/MainLayout.vue";
 
+const value = ref("0.00");
+
 import ExpenseEntryComponent from "./../components/funds/ExpenseEntryComponent.vue";
 import IncomeEntryComponent from "./../components/funds/IncomeEntryComponent.vue";
 const isAnIncome = ref(true);
+const incomeCreated = () => {
+  value.value = "0.00";
+};
 </script>
 
 
